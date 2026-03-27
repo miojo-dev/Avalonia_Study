@@ -1,0 +1,44 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="tutorial.MainWindow"
+        Title="tutorial">
+    <StackPanel Width="450">
+        <Border Margin="5" CornerRadius="10" Background="LightBlue">
+            <TextBlock
+                Margin="5"
+                FontSize="24"
+                HorizontalAlignment="Center"
+                Text="Temperature Converter">
+            </TextBlock>
+        </Border>
+        <Button Click="Switch_Sort">Switch</Button>
+        <Grid ShowGridLines="False" Margin="5"
+              ColumnDefinitions="120, 100"
+              RowDefinitions="Auto, Auto">
+            <TextBlock Grid.Row='0'
+                       Grid.Column="0"
+                       Margin="10"
+                       Name="CelsiusText">
+                Celsius
+            </TextBlock>
+            <TextBox Grid.Row='0'
+                     Grid.Column="1"
+                     Margin="0 5"
+                     Name="Celsius" />
+            <TextBlock Grid.Row="1"
+                       Grid.Column="0"
+                       Margin="10"
+                       Name="FahrenheitText">
+                Fahrenheit
+            </TextBlock>
+            <TextBox Grid.Row="1"
+                     Grid.Column="1"
+                     Margin="0 5"
+                     Name="Fahrenheit" />
+        </Grid>
+        <Button HorizontalAlignment="Center" Click="Button_OnClick">Calculate</Button>
+    </StackPanel>
+</Window>

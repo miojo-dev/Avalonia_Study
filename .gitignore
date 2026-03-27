@@ -1,0 +1,43 @@
+# Build output
+bin/
+obj/
+out/
+
+# Avalonia compiled XAML cache
+*.g.cs
+*.g.i.cs
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# Visual Studio
+.vs/
+*.dbmdl
+*.pdb
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# Logs
+*.log
+
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Avalonia Designer cache
+.avalonia/
+
+# Temporary files
+*.tmp
+*.temp
