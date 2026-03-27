@@ -13,16 +13,35 @@ public partial class MainWindow : Window
 
     private void Button_OnClick(object? sender, RoutedEventArgs e)
     {
-        if (double.TryParse(Celsius.Text, out double C))
-        {
-            var F = C * (9d / 5d) + 32;
+        var rowCelsius = Grid.GetRow(Celsius);
+        var rawDegrees = "";
+        TextBox targetTextBox;
 
-            Fahrenheit.Text = F.ToString("0.0");
+        if (rowCelsius == 0)
+        {
+            rawDegrees = Celsius.Text;
+
+            targetTextBox = Fahrenheit;
         }
         else
         {
-            Celsius.Text = "0";
-            Fahrenheit.Text = "0";
+            rawDegrees = Fahrenheit.Text;
+
+            targetTextBox = Celsius;
+        }
+
+        if (double.TryParse(rawDegrees, out double raw))
+        {
+            var translated = rowCelsius == 0
+                ? raw * (9d / 5d) + 32d
+                : (raw - 32d) * 5d / 9d;
+
+            targetTextBox.Text = translated.ToString("0.0");
+        }
+        else
+        {
+            Celsius.Text = "";
+            Fahrenheit.Text = "";
         }
     }
 
