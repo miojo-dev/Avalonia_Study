@@ -20,7 +20,7 @@ public partial class MainWindow : Window
 
         if (double.TryParse(rawDegrees, out double numDegrees))
         {
-            double translated = targetTextBox == Celsius
+            double translated = targetTextBox == Fahrenheit 
                 ? ConvertCToF(numDegrees)
                 : ConvertFToC(numDegrees);
 
