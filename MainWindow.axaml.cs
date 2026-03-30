@@ -13,28 +13,16 @@ public partial class MainWindow : Window
 
     private void Button_OnClick(object? sender, RoutedEventArgs e)
     {
-        var rowCelsius = Grid.GetRow(Celsius);
-        var rawDegrees = "";
-        TextBox targetTextBox;
+        GetConversionOrder(
+            out string rawDegrees,
+            out TextBox targetTextBox
+        );
 
-        if (rowCelsius == 0)
+        if (double.TryParse(rawDegrees, out double numDegrees))
         {
-            rawDegrees = Celsius.Text;
-
-            targetTextBox = Fahrenheit;
-        }
-        else
-        {
-            rawDegrees = Fahrenheit.Text;
-
-            targetTextBox = Celsius;
-        }
-
-        if (double.TryParse(rawDegrees, out double raw))
-        {
-            var translated = rowCelsius == 0
-                ? raw * (9d / 5d) + 32d
-                : (raw - 32d) * 5d / 9d;
+            double translated = targetTextBox == Celsius
+                ? ConvertCToF(numDegrees)
+                : ConvertFToC(numDegrees);
 
             targetTextBox.Text = translated.ToString("0.0");
         }
@@ -45,29 +33,68 @@ public partial class MainWindow : Window
         }
     }
 
-    private void Switch_Sort(object? sender, RoutedEventArgs e)
+    private void GetConversionOrder(out string degrees, out TextBox target)
     {
         var rowCelsius = Grid.GetRow(Celsius);
 
         if (rowCelsius == 0)
         {
-            // Celsius
-            Grid.SetRow(Celsius, 1);
-            Grid.SetRow(CelsiusText, 1);
+            degrees = Celsius.Text ?? "";
 
-            //Fahrenheit
-            Grid.SetRow(Fahrenheit, 0);
-            Grid.SetRow(FahrenheitText, 0);
+            target = Fahrenheit;
         }
         else
         {
-            // Celsius
-            Grid.SetRow(Celsius, 0);
-            Grid.SetRow(CelsiusText, 0);
+            degrees = Fahrenheit.Text ?? "";
 
-            //Fahrenheit
-            Grid.SetRow(Fahrenheit, 1);
-            Grid.SetRow(FahrenheitText, 1);
+            target = Celsius;
         }
+    }
+
+    private double ConvertCToF(double degrees)
+    {
+        double translated = degrees * (9d / 5d) + 32d;
+
+        return translated;
+    }
+
+    private double ConvertFToC(double degrees)
+    {
+        double translated = (degrees - 32d) * 5d / 9d;
+
+        return translated;
+    }
+
+    private void Switch_Sort(object? sender, RoutedEventArgs e)
+    {
+        var rowCelsius = Grid.GetRow(Celsius);
+
+        var celsius = (
+            Celsius,
+            CelsiusText
+        );
+        var fahrenheit = (
+            Fahrenheit,
+            FahrenheitText
+        );
+
+        if (rowCelsius == 0)
+        {
+            SetBlockRow(celsius, 1);
+
+            SetBlockRow(fahrenheit, 0);
+        }
+        else
+        {
+            SetBlockRow(celsius, 0);
+
+            SetBlockRow(fahrenheit, 1);
+        }
+    }
+
+    private void SetBlockRow((TextBox box, TextBlock block) block, int row)
+    {
+        Grid.SetRow(block.box, row);
+        Grid.SetRow(block.block, row);
     }
 }
