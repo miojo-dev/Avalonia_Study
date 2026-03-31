@@ -2,11 +2,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:lucideAvalonia="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="250"
+        Width="400" Height="250"
         x:Class="tutorial.MainWindow"
         Title="tutorial">
-    <StackPanel Width="450">
-        <Border Margin="5" CornerRadius="10" Background="LightBlue">
+    <StackPanel Width="300">
+        <Border Margin="5" CornerRadius="10" Background="DarkOrchid">
             <TextBlock
                 Margin="5"
                 FontSize="24"
@@ -14,30 +16,40 @@
                 Text="Temperature Converter">
             </TextBlock>
         </Border>
-        <Button Click="Switch_Sort">Switch</Button>
         <Grid ShowGridLines="False" Margin="5"
-              ColumnDefinitions="120, 100"
+              Width="300"
+              ColumnDefinitions="auto, 120, 100"
               RowDefinitions="Auto, Auto">
+            <Button
+                Grid.RowSpan="2"
+                Grid.Column="0"
+                Height="84"
+                VerticalContentAlignment="Center"
+                Click="Switch_Sort">
+                <lucideAvalonia:Lucide Icon="ArrowDownUp" StrokeBrush="Azure" Width="22" Height="22" />
+            </Button>
             <TextBlock Grid.Row='0'
-                       Grid.Column="0"
+                       Grid.Column="1"
                        Margin="10"
                        Name="CelsiusText">
                 Celsius
             </TextBlock>
             <TextBox Grid.Row='0'
-                     Grid.Column="1"
+                     Grid.Column="2"
                      Margin="0 5"
+                     Width="150"
                      Watermark="Celsius"
                      Name="Celsius" />
             <TextBlock Grid.Row="1"
-                       Grid.Column="0"
+                       Grid.Column="1"
                        Margin="10"
                        Name="FahrenheitText">
                 Fahrenheit
             </TextBlock>
             <TextBox Grid.Row="1"
-                     Grid.Column="1"
+                     Grid.Column="2"
                      Margin="0 5"
+                     Width="150"
                      Watermark="Fahrenheit"
                      Name="Fahrenheit" />
         </Grid>
