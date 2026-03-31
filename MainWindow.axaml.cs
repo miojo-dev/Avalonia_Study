@@ -96,5 +96,6 @@ public partial class MainWindow : Window
     {
         Grid.SetRow(block.box, row);
         Grid.SetRow(block.block, row);
+        block.box.IsReadOnly = !block.box.IsReadOnly;
     }
 }

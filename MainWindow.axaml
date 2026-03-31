@@ -36,6 +36,7 @@
             </TextBlock>
             <TextBox Grid.Row='0'
                      Grid.Column="2"
+                     IsReadOnly="False"
                      Margin="0 5"
                      Width="150"
                      Watermark="Celsius"
@@ -48,6 +49,7 @@
             </TextBlock>
             <TextBox Grid.Row="1"
                      Grid.Column="2"
+                     IsReadOnly="True"
                      Margin="0 5"
                      Width="150"
                      Watermark="Fahrenheit"
