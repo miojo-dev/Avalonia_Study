@@ -1,4 +1,3 @@
-using System;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 
@@ -6,6 +5,10 @@ namespace tutorial;
 
 public partial class MainWindow : Window
 {
+    private const double FreezingTempF = 32d;
+    private const double ReverseConversionRatio = (5d/9d);
+    private const double ForwardConversionRation = (9d/5d);
+    
     public MainWindow()
     {
         InitializeComponent();
@@ -14,13 +17,13 @@ public partial class MainWindow : Window
     private void Button_OnClick(object? sender, RoutedEventArgs e)
     {
         GetConversionOrder(
-            out string rawDegrees,
-            out TextBox targetTextBox
+            out var rawDegrees,
+            out var targetTextBox
         );
 
-        if (double.TryParse(rawDegrees, out double numDegrees))
+        if (double.TryParse(rawDegrees, out var numDegrees))
         {
-            double translated = targetTextBox == Fahrenheit 
+            var translated = targetTextBox == Fahrenheit 
                 ? ConvertCToF(numDegrees)
                 : ConvertFToC(numDegrees);
 
@@ -28,8 +31,8 @@ public partial class MainWindow : Window
         }
         else
         {
-            Celsius.Text = "";
-            Fahrenheit.Text = "";
+            Celsius.Text = string.Empty;
+            Fahrenheit.Text = string.Empty;
         }
     }
 
@@ -39,28 +42,28 @@ public partial class MainWindow : Window
 
         if (rowCelsius == 0)
         {
-            degrees = Celsius.Text ?? "";
+            degrees = Celsius.Text ?? string.Empty;
 
             target = Fahrenheit;
         }
         else
         {
-            degrees = Fahrenheit.Text ?? "";
+            degrees = Fahrenheit.Text ?? string.Empty;
 
             target = Celsius;
         }
     }
 
-    private double ConvertCToF(double degrees)
+    private static double ConvertCToF(double degrees)
     {
-        double translated = degrees * (9d / 5d) + 32d;
+        var translated = degrees * ForwardConversionRation + FreezingTempF;
 
         return translated;
     }
 
-    private double ConvertFToC(double degrees)
+    private static double ConvertFToC(double degrees)
     {
-        double translated = (degrees - 32d) * 5d / 9d;
+        var translated = (degrees - FreezingTempF) * ReverseConversionRatio;
 
         return translated;
     }
@@ -92,7 +95,7 @@ public partial class MainWindow : Window
         }
     }
 
-    private void SetBlockRow((TextBox box, TextBlock block) block, int row)
+    private static void SetBlockRow((TextBox box, TextBlock block) block, int row)
     {
         Grid.SetRow(block.box, row);
         Grid.SetRow(block.block, row);
